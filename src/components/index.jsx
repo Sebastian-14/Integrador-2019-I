@@ -8,31 +8,15 @@ import {
 } from 'react-router-dom'
 import About from './pages/About'
 import Error404 from './pages/Error404'
+import Home from './pages/index'
+import AppNav from './AppNav'
 
 class App1 extends Component{
     // Por usar as Router linea 3, de lo contrario seria BrowserRouter
     //Router -> encapsulador
     render(){
         return(
-            <Router>
-                <div>                    
-                    <nav>
-                        <ul>                            
-                            <li>
-                                <Link to="/acerca">Acerca</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                    <hr/>
-                    
-                    <main className="Main">                            
-                        <Switch>                                
-                            <Route path="/acerca" component={About} />                                                                
-                            <Route component={Error404} />
-                        </Switch>
-                    </main>
-                </div>
-            </Router>
+            <div></div>
         )
     }
 }
