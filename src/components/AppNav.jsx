@@ -14,52 +14,44 @@ import {
     Route,
     BrowserRouter as Router,
     Link,
-    Redirect,
+    // Redirect,
     Switch
 } from 'react-router-dom'
+// import Perfil from './pages/protected/Perfil';
 
 class AppNav extends Component{
     render(){
         return(
             <Router>
-            <div>
                 <div>
-                    <AppBar position='static'>
-                        <Toolbar className={this.props.classes.nav}>
+                    <div>
+                        <AppBar position='static'>
+                            <Toolbar className={this.props.classes.nav}>
+                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                                {/* <a href="#" className={this.props.classes.ac}>Inicio</a> */}
+                                <Link to="/" className={this.props.classes.ac}>Inicio</Link>
+                                </Typography>                        
 
-                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                            {/* <a href="#" className={this.props.classes.ac}>Inicio</a> */}
-                            <Link to="/" className={this.props.classes.ac}>Inicio</Link>
-                            </Typography>                        
+                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                                    {/* <a href="#" className={this.props.classes.ac}>Archivos</a> */}
+                                    <Link to="/acerca" className={this.props.classes.ac}>Acerca</Link>
+                                </Typography>
 
-                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                                {/* <a href="#" className={this.props.classes.ac}>Archivos</a> */}
-                                <Link to="/acerca" className={this.props.classes.ac}>Acerca</Link>
-                            </Typography>
-
-                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                                {/* <a href="#" className={this.props.classes.ac}>Publicaciones</a> */}
-                                <Link to="/publicaciones" className={this.props.classes.ac}>Publicaciones</Link>
-                            </Typography>                            
-                            <Login/>                                                       
-                        </Toolbar>
-                    </AppBar>
-                </div>        
-                        {/* <ul>                            
-                            <li>
-                                <Link to="/">Inicio</Link>
-                            </li>
-                            <li>
-                                <Link to="/acerca">Acerca</Link>
-                            </li>
-                        </ul>                     */}
-                    
+                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                                    {/* <a href="#" className={this.props.classes.ac}>Publicaciones</a> */}
+                                    <Link to="/publicaciones" className={this.props.classes.ac}>Publicaciones</Link>
+                                </Typography>                            
+                                <Login/>                                                       
+                            </Toolbar>
+                        </AppBar>
+                    </div>        
                     <main className="Main">                            
                         <Switch>
                             <Route exact path="/" component={Home} />
-                            <Route path="/acerca" component={About} />
+                            <Route exact path="/acerca" component={About} />
                             {/* Llamando al componete simple Tabs */}
                             <Route path="/publicaciones" component={Tabs} />
+                            {/* <Route path="/perfil" component={Perfil} /> */}
                             <Route component={Error404} />
                         </Switch>
                     </main>

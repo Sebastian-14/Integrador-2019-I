@@ -45,16 +45,11 @@ const MenuProps = {
 };
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+  'Diseño',
+  'Redes',
+  'Química',
+  'Producción',
+  
 ];
 
 function getStyles(name, that) {
@@ -94,41 +89,7 @@ class MultiSelect extends React.Component {
     return (
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-multiple">Name</InputLabel>
-          <Select
-            multiple
-            value={this.state.name}
-            onChange={this.handleChange}
-            input={<Input id="select-multiple" />}
-            MenuProps={MenuProps}
-          >
-            {names.map(name => (
-              <MenuItem key={name} value={name} style={getStyles(name, this)}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-multiple-checkbox">Tag</InputLabel>
-          <Select
-            multiple
-            value={this.state.name}
-            onChange={this.handleChange}
-            input={<Input id="select-multiple-checkbox" />}
-            renderValue={selected => selected.join(', ')}
-            MenuProps={MenuProps}
-          >
-            {names.map(name => (
-              <MenuItem key={name} value={name}>
-                <Checkbox checked={this.state.name.indexOf(name) > -1} />
-                <ListItemText primary={name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
+          <InputLabel htmlFor="select-multiple-chip">Tag</InputLabel>
           <Select
             multiple
             value={this.state.name}
@@ -147,52 +108,6 @@ class MultiSelect extends React.Component {
               <MenuItem key={name} value={name} style={getStyles(name, this)}>
                 {name}
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classNames(classes.formControl, classes.noLabel)}>
-          <Select
-            multiple
-            displayEmpty
-            value={this.state.name}
-            onChange={this.handleChange}
-            input={<Input id="select-multiple-placeholder" />}
-            renderValue={selected => {
-              if (selected.length === 0) {
-                return <em>Placeholder</em>;
-              }
-
-              return selected.join(', ');
-            }}
-            MenuProps={MenuProps}
-          >
-            <MenuItem disabled value="">
-              <em>Placeholder</em>
-            </MenuItem>
-            {names.map(name => (
-              <MenuItem key={name} value={name} style={getStyles(name, this)}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="select-multiple-native">
-            Native
-          </InputLabel>
-          <Select
-            multiple
-            native
-            value={this.state.name}
-            onChange={this.handleChangeMultiple}
-            inputProps={{
-              id: 'select-multiple-native',
-            }}
-          >
-            {names.map(name => (
-              <option key={name} value={name}>
-                {name}
-              </option>
             ))}
           </Select>
         </FormControl>

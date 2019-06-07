@@ -1,0 +1,23 @@
+{
+    "publicaciones":[
+        {
+            "id":1,
+            "title":"Publicacion 1",
+            "tag":[
+                    {"id":"Diseño", 
+                       "name": "Desarrollo"
+                    }],
+            "url":"https://i.imgur.com/23pDoXY.jpg",
+            "description":"My first publication",
+            "author": "Sebastian"
+        },
+        {
+            "id":2,
+            "title":"Publicacion 2",
+            "tag":"Química",
+            "url":"https://i.imgur.com/23pDoXY.jpg",
+            "description":"My second publication",
+            "author": "Anthony"
+        }
+    ]
+}

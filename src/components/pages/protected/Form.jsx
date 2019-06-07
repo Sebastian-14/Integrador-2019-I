@@ -7,73 +7,38 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import styled from 'styled-components'
+import MultiSelect from './MultiSelect';
+import CustomizedSnackbars from './Snackbar'
+import FloatingActionButtons from './FloatingActionButtons';
+
+import '../../../data/publicaciones.json'
+import UploadFiles from '../UploadFiles';
+// import MaterialUIPickers from './MaterialUIPickers';
+
 
 const styles = theme => ({
-
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  margin1: {
-    margin: 350,
-  },
-  cssLabel: {
-    '&$cssFocused': {
-      color: purple[500],
-    },
-  },
-  cssFocused: {},
-  cssUnderline: {
-    '&:after': {
-      borderBottomColor: purple[500],
-    },
-  },
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: purple[500],
-    },
-  },
-  notchedOutline: {},
-  bootstrapRoot: {
-    'label + &': {
-      marginTop: theme.spacing.unit * 3,
-    },
-  },
-  bootstrapInput: {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.common.white,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-    },
-  },
-  bootstrapFormLabel: {
-    fontSize: 18,
-  },
+  
 });
+
+const Space = styled.p`
+  padding: 1px;
+`
+
+const MainContainer = styled.div`
+  justify-content: center;
+  align-items: center;
+  width: auto;
+`
+
+const Container = styled.div`
+  max-width:350px;
+  margin:10px;
+`
 
 const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: purple,
   },
   typography: { useNextVariants: true },
 });
@@ -81,75 +46,50 @@ const theme = createMuiTheme({
 function Form(props) {
   const { classes } = props;
 
-  return (
+  return (    
     <div className={classes.root}>
-      {/* <FormControl className={classes.margin}>
-        <InputLabel
-          htmlFor="custom-css-standard-input"
-          classes={{
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-          }}
-        >
-          Titulo
-        </InputLabel>
-        <Input
-          id="custom-css-standard-input"
-          classes={{
-            underline: classes.cssUnderline,
-          }}
-        />
-      </FormControl> */}
+      <MainContainer>
+        <Container>
+          <MuiThemeProvider theme={theme}>
 
-      {/* <TextField
-        className={classes.margin}
-        InputLabelProps={{
-          classes: {
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-          },
-        }}
-        InputProps={{
-          classes: {
-            root: classes.cssOutlinedInput,
-            focused: classes.cssFocused,
-            notchedOutline: classes.notchedOutline,
-          },
-        }}
-        label="Custom CSS"
-        variant="outlined"
-        id="custom-css-outlined-input"
-      /> */}
+            {/* <FloatingActionButtons/> */}
+            <TextField
+              className={classes.margin}
+              fullWidth={true}
+              label="Titulo"          
+              id="mui-theme-provider-standard-input"
+            />
+            <Space/>
 
-      <MuiThemeProvider theme={theme}>
-        <TextField
-          className={classes.margin}
-          label="Titulo"
-          id="mui-theme-provider-standard-input"
-        />
-        <br/>
-
-        <TextField
-          className={classes.margin}
-          label="Tema"
-          id="mui-theme-provider-standard-input"
-        />
-        <br/>
-        <br/>
-
-        <TextField
-          className={classes.margin}
-          label="MuiThemeProvider"
-          variant="outlined"
-          id="mui-theme-provider-outlined-input"
-        />
-        <br/>
+            {/* <MaterialUIPickers/> */}
 
 
+            {/* <TextField
+              className={classes.margin}
+              fullWidth={true}
+              label="Tema"
+              id="mui-theme-provider-standard-input"
+            /> */}
+            <MultiSelect/>
+            <Space/>
 
+            <TextField
+              className={classes.margin}
+              fullWidth={true}
+              label="Descripcion"
+              variant="outlined"
+              id="mui-theme-provider-outlined-input"
+            />
 
+            <Space/>
+            
+            <UploadFiles/>
 
-      </MuiThemeProvider>
+            <CustomizedSnackbars />
+
+          </MuiThemeProvider>
+        </Container>
+      </MainContainer>
     </div>
   );
 }

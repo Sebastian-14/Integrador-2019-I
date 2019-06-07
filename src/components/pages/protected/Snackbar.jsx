@@ -13,6 +13,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -115,7 +116,7 @@ class CustomizedSnackbars extends React.Component {
 
     return (
       <div>
-        <Button className={classes.margin} onClick={this.handleClick}>
+        <Button className={classes.margin} style={{backgroundColor:"#F52B62", color:"white"}} variant="contained" onClick={this.handleClick}>
           Guardar
         </Button>
         <Snackbar

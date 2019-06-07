@@ -1,0 +1,74 @@
+[
+	[{
+		"peticionHttp": "GET",
+		"descripcion": "Retorna todos los usuarios",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/"
+	},
+	{
+		"peticionHttp": "GET",
+		"descripcion": "Retorna un usuario especifico",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/{id}"
+	},
+	{
+		"peticionHttp": "GET",
+		"descripcion": "Retorna todas las publicaciones de un usuario especifico",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/{id}/publications/"
+	},
+	{
+		"peticionHttp": "POST",
+		"descripcion": "Crea un usuario",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/",
+		"datosCompletos": ["name", "lastname", "email", "token", "score"],
+		"datosCompletosActual":	["image", "name", "lastname", "email", "score", "cycle", "carrer"],
+		"datosObligatorios": ["image","name", "lastname", "email"]
+	},
+	{
+		"peticionHttp": "PUT",
+		"descripcion": "Actualiza los datos de un usuario especifico",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/{id}",
+		"datosCompletos": ["name", "lastname", "email", "token", "score"],
+		"datosObligatorios": ["name", "lastname", "email", "token"]
+	},
+	{
+		"peticionHttp": "DELETE",
+		"descripcion": "Elimina un usuario especifico",
+		"url": "https://shareinfotecsup.herokuapp.com/api/user/{id}"
+	}],
+
+	
+	[
+		{
+			"peticionHttp": "GET",
+			"descripcion": "Retorna todas las publicaciones",
+			"url": "https://shareinfotecsup.herokuapp.com/api/publication/"
+		},
+		{
+			"peticionHttp": "GET",
+			"descripcion": "Retorna una publicacion especifica",
+			"url": "https://shareinfotecsup.herokuapp.com/api/publication/{id}"
+		},
+		{
+			"peticionHttp": "POST",
+			"descripcion": "Crea una publicacion",
+			"url": "https://shareinfotecsup.herokuapp.com/api/publication/",
+			"datosCompletos": ["title", "description", "createdAt", "updatedAt", "user.id", "tags.name", "resources.path", "resources.name", "resources.extension", "resources.type", "comments.content", "comments.user.id"],
+			"datosObligatorios": ["title", "description", "createdAt", "updatedAt", "user.id"]
+		},
+		{
+			"peticionHttp": "PUT",
+			"descripcion": "Actualiza los datos de una publicacion",
+			"url": "https://shareinfotecsup.herokuapp.com/api/publication/{id}",
+			"datosCompletos": ["title", "description", "createdAt", "updatedAt", "user.id", "tags.name", "resources.path", "resources.name", "resources.extension", "resources.type", "comments.content", "comments.user.id"],
+			"datosObligatorios": ["title", "description", "createdAt", "updatedAt", "user.id"]
+		},
+		{
+			"peticionHttp": "DELETE",
+			"descripcion": "Elimina una publicacion",
+			"url": "https://shareinfotecsup.herokuapp.com/api/publication/{id}"
+		}
+	]
+	
+
+]
+
+
