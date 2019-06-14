@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 // Axios
 import axios from 'axios'
@@ -102,17 +102,24 @@ class Login extends Component {
 
     logout(){
         firebase.auth().signOut().then(console.log);
+        this.setState({
+            userLoggedIn:false,
+        })
     }
 
     logInButton(){
-        if(this.state.userLoggedIn) return([
-            <Avatar src={this.state.photoUrl}>
-                {/* <Link to="/perfil"/> */}
-            </Avatar>,
+        if(this.state.userLoggedIn) return(
+            <div>
+                <Link to="/Miperfil">
+                    <Avatar src={this.state.photoUrl}>
+                        {/* <Link to="/perfil"/> */}
+                    </Avatar>
+                </Link>
                 <IconButton color="inherit" onClick={this.logout}>
                     <ExitToApp color="dark"/>
                 </IconButton>
-        ]);
+            </div>
+        );
 
         return (
             <Button variant="contained" color="secondary" onClick={this.login}>
@@ -125,9 +132,6 @@ class Login extends Component {
     render() {
         return (
             <div className={this.props.classes.container}>
-                {/* {!this.state.userLoggedIn && <Button variant="contained" className={this.props.classes.button} onClick={this.login}>
-                Iniciar Sesión con google
-                </Button>} */}
                 {this.logInButton()}
             </div>
         )

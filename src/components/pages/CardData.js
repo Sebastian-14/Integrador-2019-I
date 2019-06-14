@@ -23,7 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 
 //Images
-import reactIcon from '../../../react.svg'
+import reactIcon from '../../react.svg'
 import { CardActions } from '@material-ui/core';
 
 

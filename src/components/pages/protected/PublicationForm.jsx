@@ -29,11 +29,11 @@ const Container = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     max-width: "300px";
-    
+
   `
 
 class PublicationForm extends Component{
-  
+
   constructor(props){
       super(props)
       this.state = {
@@ -115,7 +115,6 @@ class PublicationForm extends Component{
 
         // const enlace = this.state.url
         const datos = this.state
-    
         const newData = update(datos, {
             resources:[{
               path:{
@@ -189,7 +188,7 @@ class PublicationForm extends Component{
     )
     this.setState(newData)
   }
-  
+
   guardar(e){
       e.preventDefault();
       let cod = this.state.id;
@@ -211,9 +210,9 @@ class PublicationForm extends Component{
       if(cod>0){ //Editamos un registro
         axios.put('http://shareinfotecsup.herokuapp.com/api/publication/'+cod+'/', datos )
         .then(res => {
-              let indx = this.state.pos;
-              this.state.pubs[indx] = res.data;
-              var temp = this.state.pubs;
+              //let indx = this.state.pos;
+              //this.state.pubs[indx] = res.data;
+              //var temp = this.state.pubs;
               this.setState( {
                   pos: null,
                   id: 0,
@@ -261,13 +260,13 @@ class PublicationForm extends Component{
           });
       }
   }
-    
+
   render(){
 
     return(
         <Container>
         <form onSubmit={this.guardar}>
-          
+
             <TextField
               fullWidth
               label="Tittulo"
@@ -306,7 +305,7 @@ class PublicationForm extends Component{
             <br/>
             {/* <img width="320" height="100%" src={this.state.url} alt=""/> */}
             <Button type="submit" variant="contained" color="primary">
-              Guardar  
+              Guardar
             </Button>
         </form>
       </Container>
@@ -317,10 +316,10 @@ class PublicationForm extends Component{
 PublicationForm.defaultProps = {
   title : "Nuevo",
   description : "",
-  createdAt: "2019-06-06",
-  updatedAt: "2019-06-06",
+  createdAt: "2019-06-12",
+  updatedAt: "2019-06-12",
   user: {
-      id:12
+      id:112
   }
 }
 

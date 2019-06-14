@@ -23,7 +23,7 @@ import './Tabs.css'
 // import MostrarForm from './pages/protected/MostrarForm';
 // import SearchIcon from '@material-ui/icons/Search';
 import PublicationForm from './pages/protected/PublicationForm';
-import CardData from './pages/protected/CardData';
+import CardData from './pages/CardData';
 import CardSearch from './pages/CardSearch';
 
 
@@ -111,16 +111,21 @@ class SimpleTabs extends React.Component {
               <Tab label="Mis Publicaciones" />
             </Tabs>
           </AppBar>
-          {value === 0 && 
+          {value === 0 &&
             <TabContainer style={{display:"inline"}}>
+
+              {/* Componente para busqueda */}
               <CardSearch onSearch={this.handleOnSearch} />
+
+              {/* Componente para mostrar en Cards la data */}
               <CardData data={this.handleOnFilter(this.state.filter, this.state.pubs)} />
               
             </TabContainer>
           }
 
-          {value === 1 && 
+          {value === 1 &&
             <TabContainer>
+              
               {/* <Form/> */}
               {/* <MostrarForm/> */}
               <PublicationForm/>

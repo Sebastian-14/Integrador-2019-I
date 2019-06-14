@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-// import Button from '@material-ui/core/Button'
-import {withStyles} from '@material-ui/core/styles'  
-// import Login from './Login';
+import {withStyles} from '@material-ui/core/styles'
 import AppNav from './components/AppNav'
+// import CardDetail from './components/pages/protected/CardData2';
 // import App1 from './components';
 // // import SimpleTabs from './components/Tabs'
 // import Form from './components/pages/protected/Form'
@@ -37,6 +35,8 @@ class App extends Component {
       <div className="App">
 
       <AppNav/>
+
+      {/* <CardDetail/> */}
 
       {/* <CardData/> */}
 
@@ -83,13 +83,6 @@ class App extends Component {
       {/* <CustomizedSnackbars/> */}
 
       {/* <SimpleTabs/> */}
-       
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-
-          {/* <Login/> */}
-          {/* <Button variant="contained" className={this.props.classes.button}>
-            Learn React
-          </Button> */}
       </div>
     );
   }
