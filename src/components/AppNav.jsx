@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import About from './pages/About'
 import Error404 from './pages/Error404'
 import Home from './pages/index'
-import Tabs from './Tabs'
+// import Tabs from './Tabs'
 import Otros from './pages/Otros'
 // import form from './pages/protected/form'
 
@@ -20,29 +20,19 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom'
-import Perfil from './pages/protected/Perfil';
+import Perfil from './Publications/Perfil';
+import CardList from './Publications/CardList';
 // import Perfil from './pages/protected/Perfil';
 
 const PrivateRoute = ({component:Component, authed, rest})=>(
-    <Route 
-        {...rest} 
-            render={                 
+    <Route
+        {...rest}
+            render={
             props => authed === true
                 ? <Component {...props}/>
-                : <Redirect to={{pathname: '/otros', state:{from:props.location}}}/>
+                : <Redirect to={{pathname: '/', state:{from:props.location}}}/>
     }/>
 )
-
-// const PublicRoute = ({component:Component, authed, rest})=>(
-//     <Route 
-//     {...rest} 
-//         render={                 
-//         props => authed === false
-//             ? <Component {...props}/>
-//             : <Redirect to='/cursos' />
-// }/>
-// )
-
 
 
 class AppNav extends Component{
@@ -56,7 +46,6 @@ class AppNav extends Component{
         }
     }
 
-
     componentDidMount(){
         //evalua en todo momento la autenticación. Proporcioando por Firebase
         this.removeListener = firebaseAuth().onAuthStateChanged(user =>{
@@ -66,7 +55,7 @@ class AppNav extends Component{
                     loading:false
                 })
             }else{
-                this.setState({                    
+                this.setState({
                     loading:false
                 })
             }
@@ -83,47 +72,48 @@ class AppNav extends Component{
         :(
             <Router>
                 <div>
-                    <div>
-                        <AppBar position='static'>
-                            <Toolbar className={this.props.classes.nav}>
-                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                                {/* <a href="#" className={this.props.classes.ac}>Inicio</a> */}
-                                <Link to="/" className={this.props.classes.ac}>Inicio</Link>
-                                </Typography>
+                    <AppBar position='static'>
+                        <Toolbar className={this.props.classes.nav}>
+                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                            {/* <a href="#" className={this.props.classes.ac}>Inicio</a> */}
+                            <Link to="/" className={this.props.classes.ac}>Inicio</Link>
+                            </Typography>
 
-                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                                    {/* <a href="#" className={this.props.classes.ac}>Archivos</a> */}
-                                    <Link to="/acerca" className={this.props.classes.ac}>Acerca</Link>
-                                </Typography>
+                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                                {/* <a href="#" className={this.props.classes.ac}>Archivos</a> */}
+                                <Link to="/acerca" className={this.props.classes.ac}>Acerca</Link>
+                            </Typography>
 
-                                <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
-                                    {/* <a href="#" className={this.props.classes.ac}>Publicaciones</a> */}
-                                    {
-                                        (this.state.authed)
-                                        ?
-                                            <Link to="/publicaciones" className={this.props.classes.ac}>Publicaciones</Link>
-                                        :
-                                            <Link to="/otros" className={this.props.classes.ac}>Otros</Link>
-                                    }
-                                </Typography>
+                            <Typography color="inherit" variant="h6" component="h1" className={this.props.classes.grow}>
+                                {/* <a href="#" className={this.props.classes.ac}>Publicaciones</a> */}
+                                {
+                                    (this.state.authed)
+                                    ?
+                                        <Link to="/publicaciones" className={this.props.classes.ac}>Publicaciones</Link>
+                                    :
+                                        <Link to="/otros" className={this.props.classes.ac}>Otros</Link>
+                                }
+                            </Typography>
 
-                                <Login/>
-                                
-                            </Toolbar>
-                        </AppBar>
-                    </div>        
-                    <main className="sMain">                            
+                            <Login/>
+
+                        </Toolbar>
+                    </AppBar>
+
+                    <main className="sMain">
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route exact path="/acerca" component={About} />
                             <Route exact path="/otros" component={Otros} />
                             {/* Llamando al componete simple Tabs */}
-                            <PrivateRoute authed={this.state.authed}  exact path="/publicaciones" component={Tabs} />
+                            {/* Llamando a CardList que le pasa props a CardData */}
+                            <PrivateRoute authed={this.state.authed}  exact path="/publicaciones" component={CardList} />
                             {/* <Route path="/perfil" component={Perfil} /> */}
-                            <PrivateRoute authed={this.state.authed} exact path="/Miperfil" component={Perfil} />
+                            <PrivateRoute authed={this.state.authed} exact path="/perfil" component={Perfil} />
                             <Route component={Error404} />
                         </Switch>
                     </main>
+
                 </div>
             </Router>
         );
@@ -141,5 +131,5 @@ export default withStyles({
     ac:{
         textDecoration:'none',
         color:'white',
-    }  
+    }
 })(AppNav)

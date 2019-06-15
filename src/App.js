@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {withStyles} from '@material-ui/core/styles'
 import AppNav from './components/AppNav'
+// import Perfil from './components/Publications/Perfil';
 // import CardDetail from './components/pages/protected/CardData2';
 // import App1 from './components';
 // // import SimpleTabs from './components/Tabs'
@@ -34,7 +35,9 @@ class App extends Component {
     return (
       <div className="App">
 
+
       <AppNav/>
+      {/* <Perfil/> */}
 
       {/* <CardDetail/> */}
 

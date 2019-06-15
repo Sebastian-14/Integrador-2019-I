@@ -276,6 +276,7 @@ class PublicationForm extends Component{
               id="mui-theme-provider-outlined-input"
               onChange = {this.handleInput}
             />
+
             <br/>
             <br/>
 
@@ -316,10 +317,10 @@ class PublicationForm extends Component{
 PublicationForm.defaultProps = {
   title : "Nuevo",
   description : "",
-  createdAt: "2019-06-12",
-  updatedAt: "2019-06-12",
+  createdAt: new Date().toISOString().slice(0,10),
+  updatedAt: new Date().toISOString().slice(0,10),
   user: {
-      id:112
+      id:22
   }
 }
 

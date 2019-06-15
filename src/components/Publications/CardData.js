@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 //Iconos
 // import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -26,6 +27,9 @@ import red from '@material-ui/core/colors/red';
 import reactIcon from '../../react.svg'
 import { CardActions } from '@material-ui/core';
 
+//React-router
+
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -75,22 +79,9 @@ export default function CardData(props) {
 
   const data = props.data
 
-  // const [color, setColor] = useState(red)
-
-  // function Click() {
-
-    
-  // }
-
-  // const [expanded, setExpanded] = React.useState(false);
-
-  // function handleExpandClick() {
-  //   setExpanded(!expanded);
-  // }
-  
   const Lista = data.map((d)=>
 
-    <Card className={classes.card}>
+    <Card className={classes.card} key={d.id}>
       <CardHeader
         avatar={
 
@@ -100,7 +91,7 @@ export default function CardData(props) {
             </Avatar>
             <p>{d.user.name}</p>
           </div>
-          
+
         }
         action={
           <IconButton aria-label="Settings">
@@ -111,11 +102,7 @@ export default function CardData(props) {
         //subheader={`By ${d.user.name}`}
         subheader={d.createdAt}
       />
-      {/* <CardMedia
-        className={classes.media}
-        image={reactIcon}
-        //title="Paella dish"
-      /> */}
+
       <img  src={reactIcon} className="App-logo" alt="imagen"/>
 
       <CardContent>
@@ -126,27 +113,16 @@ export default function CardData(props) {
 
       <CardActions disableSpacing>
         <IconButton aria-label="Add to favorites">
-          {/* <FavoriteIcon onClick={Click} /> */}
-          {/* <FavoriteIcon/> */}
           <GradeIcon/>
         </IconButton>
-        {/* <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton> */}
-        {/* <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="Show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton> */}
+
+        <Button variant="outlined" color="secondary">
+          <Link to="/detail">Ver mas</Link>
+        </Button>
       </CardActions>
     </Card>
 
-  )
+  ).reverse()
 
   return (
     <Container>

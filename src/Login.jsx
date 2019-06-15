@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 import firebase from './initializers/firebase'
 import {withStyles} from '@material-ui/core/styles'
 import './Login.css'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import ExitToApp from '@material-ui/icons/ExitToApp'
+
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import {Link} from 'react-router-dom'
 
@@ -17,16 +21,19 @@ class Login extends Component {
     constructor(props){
         super(props);
 
-        this.login = this.login.bind(this)
-        this.logout = this.logout.bind(this)
-
         this.state = {
             userLoggedIn: false,
             photoUrl: '',
             name: '',
             email: '',
-            lastname: ''
+            lastname: '',
+            open: false,
+            anchorEl : null
         }
+        this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
     componentDidMount(){
@@ -34,7 +41,7 @@ class Login extends Component {
             // if(user.providerData[0].email.slice(-13)=='tecsup.edu.pe'){
                 if(user){
                     if(user.providerData[0].email.slice(-13) === 'tecsup.edu.pe'){
-                        
+
                         //Hay inicio de sesión
                         this.setState({
                             userLoggedIn:true,
@@ -61,7 +68,7 @@ class Login extends Component {
                             lastname: n2,
                             email: this.state.email,
                         }
-                        
+
                         axios.post('https://shareinfotecsup.herokuapp.com/api/user/', datos)
                         .then(function (response) {
                             console.log(response);
@@ -72,7 +79,7 @@ class Login extends Component {
 
 
                     }else{
-                        
+
                         firebase.auth().signOut()
                     }
                 }else{
@@ -107,16 +114,51 @@ class Login extends Component {
         })
     }
 
+    handleClick(e){
+    //     this.setState(state => ({
+    //     open:
+    //       state.open === false
+    //         ? true
+    //         : false,
+    //   }))
+        this.setState({
+            anchorEl:e.currentTarget
+        })
+    }
+
+    handleClose(){
+        this.setState({
+            anchorEl: null
+        })
+    }
+
     logInButton(){
         if(this.state.userLoggedIn) return(
             <div>
-                <Link to="/Miperfil">
+                <Button onClick={this.handleClick} aria-haspopup="true" aria-controls="simple-menu">
                     <Avatar src={this.state.photoUrl}>
-                        {/* <Link to="/perfil"/> */}
                     </Avatar>
-                </Link>
+                </Button>
+                <Menu
+                    id="simple-menu"
+                    keepMounted
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.handleClose}
+                >
+                    <Link to="/perfil"><MenuItem onClick={this.handleClose}>Profile</MenuItem></Link>
+                    <MenuItem onClick={this.handleClose}>Mis Publicaciones</MenuItem>
+                    <MenuItem onClick={this.handleClose}>Cerrar</MenuItem>
+                </Menu>
+
+
+                {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    Open Menu
+                </Button> */}
+
                 <IconButton color="inherit" onClick={this.logout}>
-                    <ExitToApp color="dark"/>
+                    {/* <ExitToApp color="dark"/> */}
+                    <ExitToApp/>
                 </IconButton>
             </div>
         );
@@ -136,7 +178,7 @@ class Login extends Component {
             </div>
         )
     }
-    
+
 }
 
 export default withStyles({

@@ -18,20 +18,20 @@ const AuthElements = function(props) {
                 </IconButton>
         ]);
 
-        return (            
+        return (
             <Button variant="contained" onClick={props.login}>
                 Iniciar Sesión con Google
             </Button>
         )
     }
-    
+
     return (
-        
+
     <div className={props.classes.container}>
         {logInButton()}
     </div>
     )
-    
+
 }
 
 export default withStyles({

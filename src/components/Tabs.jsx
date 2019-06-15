@@ -22,9 +22,9 @@ import './Tabs.css'
 // import UploadFiles from './pages/UploadFiles';
 // import MostrarForm from './pages/protected/MostrarForm';
 // import SearchIcon from '@material-ui/icons/Search';
-import PublicationForm from './pages/protected/PublicationForm';
-import CardData from './pages/CardData';
-import CardSearch from './pages/CardSearch';
+import PublicationForm from './Publications/PublicationForm';
+import CardData from './Publications/CardData';
+import CardSearch from './Publications/CardSearch';
 
 
 
@@ -51,12 +51,6 @@ const styles = theme => ({
 
 class SimpleTabs extends React.Component {
 
-  
-  // state = {
-  //   value: 0,
-    
-  // };
-
   constructor(props){
     super(props)
     this.state={
@@ -69,7 +63,7 @@ class SimpleTabs extends React.Component {
     this.handleOnFilter = this.handleOnFilter.bind(this)
     this.handleOnSearch = this.handleOnSearch.bind(this)
   }
-  
+
   componentWillMount() {
     axios.get('http://shareinfotecsup.herokuapp.com/api/publication/')
     // axios.get('https://pokeapi.co/api/v2/pokemon/')
@@ -119,19 +113,19 @@ class SimpleTabs extends React.Component {
 
               {/* Componente para mostrar en Cards la data */}
               <CardData data={this.handleOnFilter(this.state.filter, this.state.pubs)} />
-              
+
             </TabContainer>
           }
 
           {value === 1 &&
             <TabContainer>
-              
+
               {/* <Form/> */}
               {/* <MostrarForm/> */}
               <PublicationForm/>
               {/* <Imagen/> */}
               {/* <UploadFiles/> */}
-              
+
             </TabContainer>}
 
           {value === 2 && <TabContainer>Item 3</TabContainer>}
