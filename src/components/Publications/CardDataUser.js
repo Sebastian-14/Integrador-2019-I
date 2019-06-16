@@ -1,5 +1,4 @@
-// import React from 'react'
-import React from 'react';
+import React from 'react'
 
 // Style-components
 import styled from 'styled-components'
@@ -72,7 +71,6 @@ const useStyles = makeStyles(theme => ({
     flex-direction: row;
   `
 
-// Funcion
 export default function CardData(props) {
 
   const classes = useStyles();
@@ -133,7 +131,3 @@ export default function CardData(props) {
   )
 
 }
-
-// CardData.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };

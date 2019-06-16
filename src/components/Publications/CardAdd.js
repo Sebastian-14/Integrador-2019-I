@@ -14,8 +14,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // import { makeStyles } from '@material-ui/core/styles';
@@ -26,20 +24,6 @@ import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 // import { red } from '@material-ui/core/colors';
 // import Icon from '@material-ui/core/Icon';
-
-// import styled from 'styled-components'
-
-
-// const Container = styled.div`
-//     /* display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-wrap: wrap;
-//     flex-direction: row;
-//     max-width: "500px"; */
-//     min-width: "500px";
-
-//   `
 
 class CardAdd extends React.Component{
 
@@ -149,7 +133,6 @@ class CardAdd extends React.Component{
       firebase.storage().ref('data').child(image.name).getDownloadURL().then(url=>{
         console.log(url);
 
-        // const enlace = this.state.url
         const datos = this.state
         const newData = update(datos, {
             resources:[{
@@ -161,10 +144,6 @@ class CardAdd extends React.Component{
           }
         )
         this.setState(newData)
-
-        // this.setState({
-        //   url
-        // })
       })
       console.log(this.state.url)
     });
@@ -190,40 +169,6 @@ class CardAdd extends React.Component{
     })
     console.log(this.state);
   }
-
-  // handleName(e){
-  //   const { value } = e.target;
-
-  //   const datos = this.state
-
-  //   const newData = update(datos, {
-  //       resources:[{
-  //         name:{
-  //           $set:
-  //             value
-  //         }
-  //       }]
-  //     }
-  //   )
-  //   this.setState(newData)
-  // }
-
-  // handlePath(e){
-  //   const { value } = e.target;
-
-  //   const datos = this.state
-
-  //   const newData = update(datos, {
-  //       resources:[{
-  //         path:{
-  //           $set:
-  //             value
-  //         }
-  //       }]
-  //     }
-  //   )
-  //   this.setState(newData)
-  // }
 
   guardar(e){
       e.preventDefault();
@@ -296,7 +241,6 @@ class CardAdd extends React.Component{
           });
       }
   }
-
 
   render(){
     return(

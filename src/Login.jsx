@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Button } from '@material-ui/core';
 import firebase from './initializers/firebase'
-import {withStyles} from '@material-ui/core/styles'
+// import {withStyles} from '@material-ui/core/styles'
 import './Login.css'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
@@ -13,16 +13,31 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import {Link} from 'react-router-dom'
 
+
+//Redux
+//connect permite conectar react con el almacen
+// import {connect} from 'react-redux'
+// import {setUser, clearUser} from './initializers/actions'
+
 // Axios
 import axios from 'axios'
 
-class Login extends Component {
+export const MainContext = React.createContext({
+    user: [],
+    cod:0,
+    userLoggedIn: false
+})
+
+
+export class Login extends Component {
 
     constructor(props){
         super(props);
 
         this.state = {
             userLoggedIn: false,
+            cod:0,
+            user:[],
             photoUrl: '',
             name: '',
             email: '',
@@ -35,6 +50,14 @@ class Login extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleClose = this.handleClose.bind(this)
     }
+
+    // componentWillMount(){
+    //     axios.get('http://shareinfotecsup.herokuapp.com/api/user/')
+    //     .then(res => {
+    //     this.setState({ pubs: res.data})
+    //     console.log(res)
+    //     });
+    // }
 
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user)=>{
@@ -56,12 +79,11 @@ class Login extends Component {
                         let n = data[0]+ " " + data[1]
                         let n2 = data[2]+ " "+ data[3]
 
-                        console.log(n)
+                        //console.log(n)
 
-                        console.log(user.providerData[0].photoURL)
+                        //console.log(user.providerData[0].photoURL)
 
                         // Insertando un usario
-
                         let datos= {
                             image: this.state.photoUrl,
                             name: n,
@@ -70,17 +92,33 @@ class Login extends Component {
                         }
 
                         axios.post('https://shareinfotecsup.herokuapp.com/api/user/', datos)
-                        .then(function (response) {
-                            console.log(response);
+                        .then(res => {
+                            // this.state.pubs.push(res.data);
+                            // var temp = this.state.pubs;
+                            this.setState( {
+                                cod:res.data.id,
+                                user:res.data
+                            });
+                            console.log(res.data.id);
+                            console.log(this.state.cod)
+                            console.log(this.state.user)
                         })
                         .catch(function (error) {
                             console.log(error);
                         });
 
+                        // let id = this.state.cod
+                        // axios.get('http://shareinfotecsup.herokuapp.com/api/user/'+id)
+                        // // axios.get('https://pokeapi.co/api/v2/pokemon/')
+                        // .then(res => {
+                        //     this.setState({ user: res.data})
+                        // });
+                        // console.log(this.state.user)
+
 
                     }else{
-
                         firebase.auth().signOut()
+                        alert("Solo usuarios de Tecsup")
                     }
                 }else{
                     //No hay ininco de sesión
@@ -146,9 +184,15 @@ class Login extends Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
                 >
-                    <Link to="/perfil"><MenuItem onClick={this.handleClose}>Profile</MenuItem></Link>
-                    <MenuItem onClick={this.handleClose}>Mis Publicaciones</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Cerrar</MenuItem>
+                    <Link to="/perfil">
+                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                    </Link>
+                    <Link to="/misPublicaciones">
+                        <MenuItem onClick={this.handleClose}>Mis Publicaciones</MenuItem>
+                    </Link>
+                    <Link to="/">
+                        <MenuItem onClick={this.handleClose}>Cerrar</MenuItem>
+                    </Link>
                 </Menu>
 
 
@@ -173,20 +217,89 @@ class Login extends Component {
 
     render() {
         return (
-            <div className={this.props.classes.container}>
+           <div>
                 {this.logInButton()}
-            </div>
+                <MainContext.Provider
+                    value={
+                        {
+                            user: this.state.user,
+                            cod:this.state.cod,
+                            userLoggedIn: this.state.userLoggedIn
+                        }
+                    }
+                >
+                {this.props.children}
+                </MainContext.Provider>
+           </div>
         )
     }
 
 }
 
-export default withStyles({
-    button:{
-      backgroundColor:'red'
-    },
-    container:{
-        display:'flex',
-        flexDirection:'row'
+
+// export class LoginProvider extends Component{
+
+//     constructor(props){
+//         super(props)
+//         this.state={
+//             user: this.props.user,
+//             cod: this.props.cod,
+//             userLoggedIn : this.props.userLoggedIn
+//         }
+//     }
+
+//     render(){
+//         return(
+//              <MainContext.Provider
+//                     value={
+//                         {
+//                             user: this.state.user,
+//                             cod:this.state.cod,
+//                             userLoggedIn: this.state.userLoggedIn
+//                         }
+//                     }
+//                 >
+//                     {this.props.children}
+//             </MainContext.Provider>
+//         )
+//     }
+// }
+
+// export default withStyles({
+//     button:{
+//       backgroundColor:'red'
+//     },
+//     container:{
+//         display:'flex',
+//         flexDirection:'row'
+//     }
+//   }) (Login);
+
+
+export const MainContextConsumer = MainContext.Consumer;
+
+export class LoginConsumer extends Component{
+    render(){
+        return(
+            <MainContext.Consumer>
+                {this.props.children}
+            </MainContext.Consumer>
+        )
     }
-  }) (Login);
+}
+
+//Mapear infromación del estado hacia props del componente
+//Cuando se requiere nueva informacion del almcen se tiene que pasar por aqui
+// const mapStateToProps = (state)=>{
+//     return{
+//         user: state.user
+//     }
+// }
+
+// //Encajar acciones que podamos y ejecutar para modificar el estado
+// const mapDispatchToProps = {
+//     setUser,
+//     clearUser
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login)

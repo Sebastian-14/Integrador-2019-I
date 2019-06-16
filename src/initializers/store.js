@@ -1,8 +1,8 @@
 import {createStore, combineReducers, compose} from 'redux'
 import persistState from 'redux-localstorage'
 
-function userReducer(state=null, action) {    
-    switch (action.type) {        
+function userReducer(state=null, action) {
+    switch (action.type) {
         case 'LOGGED_IN':
             return action.user
 

@@ -19,7 +19,7 @@ const AuthElements = function(props) {
         ]);
 
         return (
-            <Button variant="contained" onClick={props.login}>
+            <Button variant="contained" color="secondary" onClick={props.login}>
                 Iniciar Sesión con Google
             </Button>
         )
@@ -27,9 +27,9 @@ const AuthElements = function(props) {
 
     return (
 
-    <div className={props.classes.container}>
-        {logInButton()}
-    </div>
+        <div className={props.classes.container}>
+            {logInButton()}
+        </div>
     )
 
 }

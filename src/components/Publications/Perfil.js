@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { TextField, Button } from '@material-ui/core';
+// import { TextField, Button } from '@material-ui/core';
 
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import { LoginConsumer } from '../../Login';
 
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* flex-wrap: wrap; */
-    /* flex-direction: row; */
-    max-width: "500px";
-    min-width: "500px";
-  `
+// const Container = styled.div`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     /* flex-wrap: wrap; */
+//     /* flex-direction: row; */
+//     max-width: "500px";
+//     min-width: "500px";
+//   `
 
 export default class Perfil extends Component {
 
@@ -39,16 +40,16 @@ export default class Perfil extends Component {
     console.log(this.state);
   }
 
-  componentWillMount(){
-    let cod= 62
-    axios.get('http://shareinfotecsup.herokuapp.com/api/user/'+cod)
-    // axios.get('https://pokeapi.co/api/v2/pokemon/')
-    .then(res => {
-      this.setState({ info: res.data})
-      console.log(res)
-    });
-    console.log("Despues de props")
-  }
+  // componentWillMount(){
+  //   let cod= 62
+  //   axios.get('http://shareinfotecsup.herokuapp.com/api/user/'+cod)
+  //   // axios.get('https://pokeapi.co/api/v2/pokemon/')
+  //   .then(res => {
+  //     this.setState({ info: res.data})
+  //     console.log(res)
+  //   });
+  //   console.log("Despues de props")
+  // }
 
   guardar(e){
     e.preventDefault();
@@ -77,44 +78,25 @@ export default class Perfil extends Component {
 
   render() {
     // const cod = this.props.user
-    return (
-      <Container>
-        <br/>
-        <form onSubmit={this.guardar}>
-        <h1>Mi perfil</h1>
-        <img src={this.state.info.image} alt="imagen" height='100'/>
-          <h2>Codigo : {this.state.info.id}</h2>
-          <h2>Nombre : {this.state.info.name}</h2>
-          <h2>Apellido : {this.state.info.lastname}</h2>
-          <h2>Email : {this.state.info.email}</h2>
-          <div>
-            <h2>Ciclo : {this.state.info.cycle}</h2>
-            <TextField
-                    fullWidth
-                    label="Ciclo"
-                    name="cycle"
-                    value={this.state.ciclo}
-                    variant="outlined"
-                    id="mui-theme-provider-outlined-input"
-                    onChange = {this.handleInput}
-                  />
-
-          </div>
-          <h2>Carrera : {this.state.info.career}</h2>
-          <TextField
-                    fullWidth
-                    label="Carrera"
-                    value={this.state.carrera}
-                    name="career"
-                    variant="outlined"
-                    id="mui-theme-provider-outlined-input"
-                    onChange = {this.handleInput}
-                  />
-            <Button type="submit" variant="contained" color="primary">
-              Guardar
-            </Button>
-        </form>
-      </Container>
+    return(
+      <LoginConsumer>
+        {
+          value=>{
+            return(
+              <div>
+                Codigo: <h1>{value.user.id}</h1>
+                Nombre: <h1>{value.user.name}</h1>
+                Apellido: <h1>{value.user.lastname}</h1>
+                Email: <h1>{value.user.email}</h1>
+                {/* <h1>{value.user.score}</h1> */}
+                Ciclo: <h1>{value.user.cycle}</h1>
+                Carrera: <h1>{value.user.career}</h1>
+              </div>
+            )
+          }
+        }
+        {/* <div><h1>Hello</h1></div> */}
+      </LoginConsumer>
     )
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Login from '../Login';
+import {Login} from '../Login';
 import { withStyles } from '@material-ui/core/styles';
 import About from './pages/About'
 import Error404 from './pages/Error404'
@@ -20,8 +20,11 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom'
-import Perfil from './Publications/Perfil';
+// import Perfil from './Publications/Perfil';
 import CardList from './Publications/CardList';
+import CardPass from './Publications/CardPass';
+import CardDetail from './Publications/CardDetail'
+import CardListDataUser from './Publications/CardListDataUser'
 // import Perfil from './pages/protected/Perfil';
 
 const PrivateRoute = ({component:Component, authed, rest})=>(
@@ -56,6 +59,7 @@ class AppNav extends Component{
                 })
             }else{
                 this.setState({
+                    authed:false,
                     loading:false
                 })
             }
@@ -105,11 +109,15 @@ class AppNav extends Component{
                             <Route exact path="/" component={Home} />
                             <Route exact path="/acerca" component={About} />
                             <Route exact path="/otros" component={Otros} />
+                            <Route exact path="/publicacion/:id" component={CardDetail} />
+                            <Route exact path="/user/:id" component={CardListDataUser} />
                             {/* Llamando al componete simple Tabs */}
                             {/* Llamando a CardList que le pasa props a CardData */}
+                            {/* <PrivateRoute authed={this.state.authed}  exact path="/publicacion/:id" component={CardDetail} /> */}
                             <PrivateRoute authed={this.state.authed}  exact path="/publicaciones" component={CardList} />
                             {/* <Route path="/perfil" component={Perfil} /> */}
-                            <PrivateRoute authed={this.state.authed} exact path="/perfil" component={Perfil} />
+                            <PrivateRoute authed={this.state.authed} exact path="/perfil" component={CardPass} />
+                            {/* <PrivateRoute authed={this.state.authed} exact path="/user/:id" component={CardUser} /> */}
                             <Route component={Error404} />
                         </Switch>
                     </main>
