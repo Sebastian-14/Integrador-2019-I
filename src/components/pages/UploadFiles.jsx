@@ -53,6 +53,7 @@ class UploadFiles extends Component {
           url
         })
       })
+      console.log(this.state.url)
     });
   }
 
