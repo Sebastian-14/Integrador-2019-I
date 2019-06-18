@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import CardDataUser from './CardDataUser';
-import CardUserProfile from './CardUserProfile';
+import CardUserData from './CardUserData';
+// import CardUserProfile from './CardUserProfile';
 
 export default class CardListDataUser extends Component{
 
@@ -58,8 +58,8 @@ export default class CardListDataUser extends Component{
         {/* <h1>{u.name}</h1>
         <h1>{u.lastname}</h1> */}
         {/* <img src={u.image} height="200px" alt="imagen"/> */}
-        <CardUserProfile data={p}/>
-        <CardDataUser data={p}/>
+        {/* <CardUserProfile data={p}/> */}
+        <CardUserData data={p}/>
       </div>
     )
   }

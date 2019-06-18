@@ -3,6 +3,7 @@ import axios from 'axios'
 import CardData from './CardData'
 import CardSearch from './CardSearch'
 import CardAdd from './CardAdd';
+// import { Login, LoginConsumer } from '../../Login';
 
 export default class CardList extends Component {
   constructor(props){
@@ -34,7 +35,6 @@ export default class CardList extends Component {
 
   componentWillMount() {
     axios.get('http://shareinfotecsup.herokuapp.com/api/publication/')
-    // axios.get('https://pokeapi.co/api/v2/pokemon/')
     .then(res => {
       this.setState({ pubs: res.data})
       console.log(res)
@@ -44,9 +44,9 @@ export default class CardList extends Component {
   render() {
     return (
       <div>
-        <CardAdd/>
-        <CardSearch onSearch={this.handleOnSearch} />
-        <CardData data={this.handleOnFilter(this.state.filter, this.state.pubs)} />
+          <CardAdd/>
+          <CardSearch onSearch={this.handleOnSearch} />
+          <CardData data={this.handleOnFilter(this.state.filter, this.state.pubs)} />
       </div>
     )
   }

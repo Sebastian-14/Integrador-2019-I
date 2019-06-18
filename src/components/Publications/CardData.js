@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 //Iconos
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import GradeIcon from '@material-ui/icons/Grade'
+// import GradeIcon from '@material-ui/icons/Grade'
 
 // Estilos
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,6 +30,7 @@ import { CardActions } from '@material-ui/core';
 //React-router
 
 import {Link} from 'react-router-dom'
+import AddFav from './AddFav';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -60,7 +61,10 @@ const useStyles = makeStyles(theme => ({
   },
   size:{
     fontSize: 25,
-  }
+  },
+  // title:{
+  //   fontSize:35
+  // }
 
 }));
 
@@ -84,7 +88,6 @@ export default function CardData(props) {
     <Card className={classes.card} key={d.id}>
       <CardHeader
         avatar={
-
           <div>
            <Link to={`/user/${d.user.id}`}>
               <Avatar aria-label="Recipe" className={classes.avatar} src={d.user.image}>
@@ -114,9 +117,9 @@ export default function CardData(props) {
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
-          <GradeIcon/>
-        </IconButton>
+        {/* <IconButton aria-label="Add to favorites"> */}
+          <AddFav data={d.id} user={d.user.id}/>
+        {/* </IconButton> */}
 
         <Button variant="outlined" color="secondary">
           <Link to={`/publicacion/${d.id}`}>Ver mas</Link>

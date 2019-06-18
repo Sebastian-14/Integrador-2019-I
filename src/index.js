@@ -8,20 +8,20 @@ import * as serviceWorker from './serviceWorker';
 //Permite insertar información del almacén en cada componente.
 //Para ello todos deben ser hijos de provider.
 // import {Provider} from 'react-redux'
-import store from './initializers/store'
-import firebase from './initializers/firebase'
+// import store from './initializers/store'
+// import firebase from './initializers/firebase'
 
 //Importando acciones
-import {setUser, clearUser} from './initializers/actions'
+// import {setUser, clearUser} from './initializers/actions'
 
-firebase.auth().onAuthStateChanged((user)=>{
-    //dispatch para poder pasar por el almacen
-    if(user){
-        store.dispatch(setUser(user))
-    }else{
-        store.dispatch(clearUser())
-    }
-})
+// firebase.auth().onAuthStateChanged((user)=>{
+//     //dispatch para poder pasar por el almacen
+//     if(user){
+//         store.dispatch(setUser(user))
+//     }else{
+//         store.dispatch(clearUser())
+//     }
+// })
 
 ReactDOM.render(
   //Pasando por el almacen

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+// import { MainContext } from './MainContext';
+import { LoginConsumer } from '../../Login';
 // import { TextField, Button } from '@material-ui/core';
 
 // import styled from 'styled-components'
-import { LoginConsumer } from '../../Login';
+// import { LoginConsumer } from '../../Login';
 
 // const Container = styled.div`
 //     display: flex;
@@ -79,24 +81,26 @@ export default class Perfil extends Component {
   render() {
     // const cod = this.props.user
     return(
-      <LoginConsumer>
-        {
-          value=>{
-            return(
-              <div>
-                Codigo: <h1>{value.user.id}</h1>
-                Nombre: <h1>{value.user.name}</h1>
-                Apellido: <h1>{value.user.lastname}</h1>
-                Email: <h1>{value.user.email}</h1>
-                {/* <h1>{value.user.score}</h1> */}
-                Ciclo: <h1>{value.user.cycle}</h1>
-                Carrera: <h1>{value.user.career}</h1>
-              </div>
-            )
-          }
-        }
-        {/* <div><h1>Hello</h1></div> */}
-      </LoginConsumer>
+      <div>
+          <LoginConsumer>
+            {
+              value=>{
+                return(
+                  <div>
+                    Codigo: <h1>{value.user.id}</h1>
+                    Nombre: <h1>{value.user.name}</h1>
+                    Apellido: <h1>{value.user.lastname}</h1>
+                    Email: <h1>{value.user.email}</h1>
+                    Score: <h1>{value.user.score}</h1>
+                    Ciclo: <h1>{value.user.cycle}</h1>
+                    Carrera: <h1>{value.user.career}</h1>
+                  </div>
+                )
+              }
+            }
+          </LoginConsumer>
+            {console.log(this.props)}
+      </div>
     )
   }
 }

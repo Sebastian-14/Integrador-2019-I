@@ -113,10 +113,14 @@ class AppNav extends Component{
                             <Route exact path="/user/:id" component={CardListDataUser} />
                             {/* Llamando al componete simple Tabs */}
                             {/* Llamando a CardList que le pasa props a CardData */}
+
+                            <Route authed={this.state.authed} exact path="/perfil" component={CardPass} />
+
                             {/* <PrivateRoute authed={this.state.authed}  exact path="/publicacion/:id" component={CardDetail} /> */}
                             <PrivateRoute authed={this.state.authed}  exact path="/publicaciones" component={CardList} />
                             {/* <Route path="/perfil" component={Perfil} /> */}
-                            <PrivateRoute authed={this.state.authed} exact path="/perfil" component={CardPass} />
+
+                            {/* <PrivateRoute authed={this.state.authed} exact path="/perfil" component={CardPass} /> */}
                             {/* <PrivateRoute authed={this.state.authed} exact path="/user/:id" component={CardUser} /> */}
                             <Route component={Error404} />
                         </Switch>

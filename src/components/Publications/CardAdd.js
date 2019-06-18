@@ -41,8 +41,8 @@ class CardAdd extends React.Component{
           updatedAt: "",
           resources:[
             {
-              path:'',
-              name:''
+              path:null,
+              name:null
             }
           ],
           user: {
@@ -331,10 +331,10 @@ class CardAdd extends React.Component{
 CardAdd.defaultProps = {
   title : "Nuevo",
   description : "",
-  createdAt: new Date(),
-  updatedAt: new Date().toISOString().slice(0,10),
+  createdAt: new Date().toLocaleDateString().split('/').reverse().join('-'),
+  updatedAt: new Date().toLocaleDateString().split('/').reverse().join('-'),
   user: {
-      id:22
+      id:82
   }
 }
 

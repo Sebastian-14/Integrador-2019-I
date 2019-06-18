@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 import firebase from './initializers/firebase'
 // import {withStyles} from '@material-ui/core/styles'
 import './Login.css'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import ExitToApp from '@material-ui/icons/ExitToApp'
+// import Avatar from '@material-ui/core/Avatar'
+// import IconButton from '@material-ui/core/IconButton'
+// import ExitToApp from '@material-ui/icons/ExitToApp'
 
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+// import Button from '@material-ui/core/Button';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
 
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 
 //Redux
@@ -21,13 +21,21 @@ import {Link} from 'react-router-dom'
 
 // Axios
 import axios from 'axios'
+// import CardPassData from './components/Publications/CarddPassData';
+import AuthElements from './components/AuthElements';
+// import { MainContext } from './components/Publications/MainContext';
 
-export const MainContext = React.createContext({
-    user: [],
-    cod:0,
-    userLoggedIn: false
-})
-
+// export const MainContext = React.createContext({
+//     user: [],
+//     cod:0,
+//     userLoggedIn: false
+// })
+export const MainContext = React.createContext()
+//     userData: [],
+//     user:0,
+//     login: false,
+//     // getUser:()=>{}
+//   })
 
 export class Login extends Component {
 
@@ -51,13 +59,6 @@ export class Login extends Component {
         this.handleClose = this.handleClose.bind(this)
     }
 
-    // componentWillMount(){
-    //     axios.get('http://shareinfotecsup.herokuapp.com/api/user/')
-    //     .then(res => {
-    //     this.setState({ pubs: res.data})
-    //     console.log(res)
-    //     });
-    // }
 
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user)=>{
@@ -99,7 +100,7 @@ export class Login extends Component {
                                 cod:res.data.id,
                                 user:res.data
                             });
-                            console.log(res.data.id);
+                            console.log(res.data.id)
                             console.log(this.state.cod)
                             console.log(this.state.user)
                         })
@@ -118,7 +119,7 @@ export class Login extends Component {
 
                     }else{
                         firebase.auth().signOut()
-                        alert("Solo usuarios de Tecsup")
+                        alert("Solo pueden ingresar usuarios de Tecsup")
                     }
                 }else{
                     //No hay ininco de sesión
@@ -139,6 +140,7 @@ export class Login extends Component {
         firebase.auth().signInWithPopup(provider).then(result=>{
             //Obtener token. Firebase no almacena los token,, solo te lo da
             // let token = result.credential.accessToken;
+            this.props.setUser(this.state.cod)
             // console.log(token)
         }).catch(err=>{
             console.log(err);
@@ -170,123 +172,40 @@ export class Login extends Component {
         })
     }
 
-    logInButton(){
-        if(this.state.userLoggedIn) return(
-            <div>
-                <Button onClick={this.handleClick} aria-haspopup="true" aria-controls="simple-menu">
-                    <Avatar src={this.state.photoUrl}>
-                    </Avatar>
-                </Button>
-                <Menu
-                    id="simple-menu"
-                    keepMounted
-                    anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}
-                    onClose={this.handleClose}
-                >
-                    <Link to="/perfil">
-                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                    </Link>
-                    <Link to="/misPublicaciones">
-                        <MenuItem onClick={this.handleClose}>Mis Publicaciones</MenuItem>
-                    </Link>
-                    <Link to="/">
-                        <MenuItem onClick={this.handleClose}>Cerrar</MenuItem>
-                    </Link>
-                </Menu>
-
-
-                {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    Open Menu
-                </Button> */}
-
-                <IconButton color="inherit" onClick={this.logout}>
-                    {/* <ExitToApp color="dark"/> */}
-                    <ExitToApp/>
-                </IconButton>
-            </div>
-        );
-
-        return (
-            <Button variant="contained" color="secondary" onClick={this.login}>
-                <i className="fab fa-google"></i>
-                Iniciar Sesión con Google
-            </Button>
-        )
-    }
-
-    render() {
-        return (
-           <div>
-                {this.logInButton()}
-                <MainContext.Provider
-                    value={
-                        {
-                            user: this.state.user,
-                            cod:this.state.cod,
-                            userLoggedIn: this.state.userLoggedIn
-                        }
-                    }
-                >
-                {this.props.children}
-                </MainContext.Provider>
-           </div>
-        )
-    }
-
-}
-
-
-// export class LoginProvider extends Component{
-
-//     constructor(props){
-//         super(props)
-//         this.state={
-//             user: this.props.user,
-//             cod: this.props.cod,
-//             userLoggedIn : this.props.userLoggedIn
-//         }
-//     }
-
-//     render(){
-//         return(
-//              <MainContext.Provider
-//                     value={
-//                         {
-//                             user: this.state.user,
-//                             cod:this.state.cod,
-//                             userLoggedIn: this.state.userLoggedIn
-//                         }
-//                     }
-//                 >
-//                     {this.props.children}
-//             </MainContext.Provider>
-//         )
-//     }
-// }
-
-// export default withStyles({
-//     button:{
-//       backgroundColor:'red'
-//     },
-//     container:{
-//         display:'flex',
-//         flexDirection:'row'
-//     }
-//   }) (Login);
-
-
-export const MainContextConsumer = MainContext.Consumer;
-
-export class LoginConsumer extends Component{
     render(){
         return(
-            <MainContext.Consumer>
-                {this.props.children}
-            </MainContext.Consumer>
+            <div>
+                <MainContext.Provider value={this.state}>
+                    {/* <AuthElements
+                        user={this.state.userLoggedIn}
+                        image={this.state.photoUrl}
+                        anchorEl={this.state.anchorEl}
+                        login={this.login}
+                        logout={this.logout}
+                        handleClick={this.handleClick}
+                        handleClose={this.handleClose}
+                    /> */}
+                    {this.props.children}
+                </MainContext.Provider>
+                <div>
+                    <AuthElements
+                        user={this.state.userLoggedIn}
+                        image={this.state.photoUrl}
+                        anchorEl={this.state.anchorEl}
+                        login={this.login}
+                        logout={this.logout}
+                        handleClick={this.handleClick}
+                        handleClose={this.handleClose}
+                    />
+                </div>
+            </div>
         )
     }
+
 }
+
+export const LoginConsumer = MainContext.Consumer;
+
 
 //Mapear infromación del estado hacia props del componente
 //Cuando se requiere nueva informacion del almcen se tiene que pasar por aqui
@@ -302,4 +221,4 @@ export class LoginConsumer extends Component{
 //     clearUser
 // }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Login)
+// export  default connect(mapStateToProps, mapDispatchToProps)(Login)
